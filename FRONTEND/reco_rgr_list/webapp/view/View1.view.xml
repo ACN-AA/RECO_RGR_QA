@@ -1,0 +1,644 @@
+<mvc:View
+    controllerName="recorgrlist.controller.View1"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f"
+    xmlns:simpleform="sap.ui.layout.form.SimpleForm"
+    xmlns:w="sap.ui.integration.widgets"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <App id="app">
+        <f:DynamicPage>
+            <f:title>
+                <f:DynamicPageTitle>
+                    <f:heading>
+                        <Title text="{i18n>title}" />
+                    </f:heading>
+                    <f:breadcrumbs>
+                        <Breadcrumbs>
+                            <Link text="{i18n>title}" />
+                        </Breadcrumbs>
+                    </f:breadcrumbs>
+                    <f:expandedContent>
+                        <Text text="Version {i18n>version}"/>
+                    </f:expandedContent>
+                    <f:content>
+                        <!-- <OverflowToolbar>
+                                <GenericTag text="SR" status="Error" press="onPressOpenPopover" design="StatusIconHidden">
+                                    <ObjectNumber number="2" unit="M" emphasized="false" state="Error" />
+                                </GenericTag>
+                            </OverflowToolbar> -->
+                    </f:content>
+                    <f:actions>
+                        <!-- <Button icon="sap-icon://action" type="Transparent" />
+                        <Button text="Button with layoutData" type="Transparent" press="onPressOpenPopover">
+                            <layoutData>
+                                <OverflowToolbarLayoutData priority="AlwaysOverflow" closeOverflowOnInteraction="false" />
+                            </layoutData>
+                        </Button> -->
+                    </f:actions>
+                    <f:navigationActions>
+                        <!-- <Button icon="sap-icon://customer" type="Transparent" press="showEmail" /> -->
+                    </f:navigationActions>
+                </f:DynamicPageTitle>
+            </f:title>
+            <f:header>
+                <f:DynamicPageHeader id="idDynamicPageHeader">
+                    <f:content>
+                        <core:Fragment fragmentName="recorgrlist.fragments.filterBar" type="XML" id="idFragmentFilterBar" />
+                    </f:content>
+                </f:DynamicPageHeader>
+            </f:header>
+            <f:content>
+                <NavContainer id="navCon">
+                    <Page id="page1" showHeader="false">
+                        <content>
+                            <core:Fragment fragmentName="recorgrlist.fragments.mainTable" type="XML" id="idFragmentMainTable" />
+                        </content>
+                    </Page>
+                    <Page id="page2" title="{infoModel>/titleDetail}{itemDetailModel>/Zcrtn} - {itemDetailModel>/Zcrtnv}" showNavButton="true" navButtonPress="handleNav_back" models="{itemDetailModel>/}">
+                        <content>
+                            <OverflowToolbar>
+                                <Label text="{i18n>RELEASE_NUMBER}: " />
+                                <Input editable="false" width="8rem" value="{itemDetailModel>/Zcrtn}" />
+                                <Input editable="false" width="2rem" value="{itemDetailModel>/Zcrtnv}" />
+                                <Label class="sapUiMediumMarginBeginEnd" text="{i18n>COMPONENT_REPAIR_STATUS}: " />
+                                <Input editable="false" width="6rem" value="{itemDetailModel>/Zcrstat}" />
+                                <ToolbarSpacer />
+                                <Button id="btn_edit" icon="sap-icon://edit" text="{i18n>edit}" type="Transparent" press="edit_detail" ariaLabelledBy="editButtonLabel" />
+                                <Button id="btn_save" icon="sap-icon://save" text="{i18n>save}" type="Transparent" press="display_detail" ariaLabelledBy="editButtonLabel" />
+                                <Button id="btn_display" icon="sap-icon://decline" text="{i18n>display}" type="Transparent" press="display_detail" ariaLabelledBy="editButtonLabel" />
+
+                                <Select>
+                                    <items>
+                                        <core:Item key="op_re_issued" text="{i18n>RE_ISSUED}" />
+                                        <core:Item key="op_wrong_issue" text="{i18n>WRONG_ISSUED}" />
+                                        <core:Item key="op_cancel" text="{i18n>CANCEL}" />
+                                    </items>
+                                </Select>
+                                <Button id="btn_print" icon="sap-icon://print" text="{i18n>print}" type="Transparent" press="edit_detail" ariaLabelledBy="editButtonLabel" />
+                            </OverflowToolbar>
+                            <IconTabBar id="idIconTabBarNoIcons" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+                                <items>
+                                    <IconTabFilter text="{i18n>HEADER_DATA}" key="HEADER_DATA">
+                                        <Panel headerText="{i18n>PROCESS_STEPS}" headerLevel="H5">
+                                            <content>
+                                                <HBox>
+                                                    <Panel>
+                                                        <content>
+                                                            <HBox>
+                                                                <VBox class="sapUiMediumMarginEnd">
+                                                                    <Button id="ps_btn_1" enabled="{infoModel>/OS4}" visible="{infoModel>/visibleProcessSteps}" text="{i18n>CREATE_PO_RETURN_ITEM}" width="12rem" />
+                                                                    <Button id="ps_btn_2" enabled="{infoModel>/OS3}" text="{i18n>RECEIVE_DAMAGE_ITEM}" width="12rem" />
+                                                                </VBox>
+                                                                <VBox visible="{infoModel>/visibleProcessSteps}">
+                                                                    <HBox alignContent="Center">
+                                                                        <Label text="{i18n>RETURN_RES_NUM_ITEM}" width="12rem" textAlign="Begin" class="sapUiSmallMarginTop" />
+                                                                        <Input id="ps_in_11" editable="false" value="{itemDetailModel>/Zsorsn}" width="12rem" />
+                                                                        <Text text="/" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd" />
+                                                                        <Input id="ps_in_12" editable="false" value="{itemDetailModel>/Zsorspo}" width="7rem" />
+                                                                        <Text text="{i18n>ITEM_DATE}" width="12rem" textAlign="Begin" class="sapUiLargeMarginBegin sapUiSmallMarginTop" />
+                                                                        <Input id="ps_in_13" editable="false" value="{itemDetailModel>/Zrierdt}" width="12rem" />
+                                                                    </HBox>
+                                                                    <HBox alignContent="Center">
+                                                                        <Text text="{i18n>RETURN_DEL_NUM_ITEM}" width="12rem" textAlign="Begin" class="sapUiSmallMarginTop" />
+                                                                        <Input id="ps_in_21" editable="false" value="{itemDetailModel>/Zrdvbln}" width="12rem" />
+                                                                        <Text text="/" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd" />
+                                                                        <Input id="ps_in_22" editable="false" value="{itemDetailModel>/Zrdposn}" width="7rem" />
+                                                                        <Text text="{i18n>RETURN_DEL_DATE}" width="12rem" textAlign="Begin" class="sapUiLargeMarginBegin sapUiSmallMarginTop" />
+                                                                        <Input id="ps_in_23" editable="false" value="PENDING" width="12rem" />
+                                                                    </HBox>
+                                                                </VBox>
+                                                            </HBox>
+                                                        </content>
+                                                    </Panel>
+                                                </HBox>
+                                            </content>
+                                        </Panel>
+                                        <Panel>
+                                            <content>
+                                                <VBox class="sapUiSmallMargin">
+                                                    <form:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" columnsL="3" labelSpanXL="4" labelSpanL="4" labelSpanM="4" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4">
+                                                        <form:content>
+                                                            <!-- Reference Object -->
+                                                            <core:Title text="{i18n>REFERENCE_OBJECT}" />
+                                                            <Label text="{i18n>FUNCTIONAL_LOC}" />
+                                                            <Input editable="false" value="{itemDetailModel>/Tplnr}" description="{itemDetailModel>/Pltxt}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>EQUIPMENT}" />
+                                                            <Input editable="false" value="{itemDetailModel>/Equnr}" description="{itemDetailModel>/Eqktx}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>ASSEMBLY}" />
+                                                            <Input editable="false" value="{itemDetailModel>/Bautl}" description="{itemDetailModel>/Bautx}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>MATERIAL}" />
+                                                            <Input editable="false" value="{itemDetailModel>/Matnr}" description="{itemDetailModel>/Maktx}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>MANUFACTURER}" />
+                                                            <Input editable="false" value="{itemDetailModel>/Herst}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>MODEL_NUMBER}" />
+                                                            <Input editable="false" value="{itemDetailModel>/Typbz}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>SERIAL_NUMBER}" />
+                                                            <Input editable="{infoModel>/OS0}" visible="{infoModel>/no_rota}" value="{itemDetailModel>/Zzserialno}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Input visible="{infoModel>/visibleProcessSteps}" editable="false" value="{itemDetailModel>/Zzserialno}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <!-- Warranty -->
+                                                            <core:Title text="{i18n>WARRANTY}" />
+                                                            <Label text="{i18n>WARRANTY_CLAIM}" />
+                                                            <Input editable="{infoModel>/OS0}" value="{itemDetailModel>/Zmganr}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>WARRANTY_START}" />
+                                                            <Input editable="{infoModel>/OS0}" value="{itemDetailModel>/Zgwldt}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>WARRANTY_END}" />
+                                                            <Input editable="{infoModel>/OS0}" value="{itemDetailModel>/Zgwlen}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <!-- REPAIR VENDOR -->
+                                                            <core:Title text="{i18n>reapirVendor}" />
+                                                            <Label text="{i18n>refurbOrderOpn}" />
+                                                            <Input editable="{infoModel>/OS0}" value="{itemDetailModel>/Zrfvor}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>rfq}" />
+                                                            <Input editable="{infoModel>/OS0}" value="{itemDetailModel>/Anfnr}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>DESIRED_VENDOR}" />
+                                                            <Input editable="false" value="{itemDetailModel>/Lifnr}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                        </form:content>
+                                                    </form:SimpleForm>
+                                                </VBox>
+                                            </content>
+                                        </Panel>
+                                        <Panel headerText="{i18n>referenceDocuments}" headerLevel="H5">
+                                            <content>
+                                                <table:Table width="58rem" id="table" rows="{refDocumentsModel>/}" class="sapUiResponsiveContentPadding" enableColumnReordering="false" selectionMode="None" visibleRowCount="{infoModel>/countRD}">
+                                                    <!-- <table:extension>
+                                                        <Toolbar id="lineItemsToolbar">
+                                                            <content>
+                                                                <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+                                                                <CheckBox id="idReIssued" text="{i18n>btn_re_issued}" select="filterStatus" valueState="Information" enabled="true" selected="false" />
+                                                                <CheckBox id="idWrongIssued" text="{i18n>btn_wrong_issued}" select="filterStatus" valueState="Warning" enabled="true" selected="false" />
+                                                                <CheckBox id="idCancelled" text="{i18n>btn_cancelled}" select="filterStatus" valueState="Error" enabled="true" selected="false" />
+                                                                <CheckBox id="idPrinted" text="{i18n>btn_printed}" select="filterStatus" valueState="Success" enabled="true" selected="false" />
+                                                                <CheckBox id="idRePrinted" text="{i18n>btn_reprinted}" select="filterStatus" valueState="Warning" enabled="true" selected="false" />
+                                                                <Button icon="sap-icon://excel-attachment" press="exportResult_upload" />
+                                                                <Button icon="sap-icon://action-settings" press="onPersoButtonPressed" />
+                                                            </content>
+                                                        </Toolbar>
+                                                    </table:extension> -->
+                                                    <table:columns>
+                                                        <table:Column width="19rem" hAlign="Center" sortProperty="Zcrtn">
+                                                            <Label text="{i18n>referenceDocumentType}" />
+                                                            <table:template>
+                                                                <Text text="{refDocumentsModel>Docty}" />
+                                                            </table:template>
+                                                        </table:Column>
+                                                        <table:Column width="21rem" hAlign="Center" sortProperty="Zcrtnv">
+                                                            <Label text="{i18n>referenceDocumentNumber}" />
+                                                            <table:template>
+                                                                <Text text="{refDocumentsModel>Docnr}" />
+                                                            </table:template>
+                                                        </table:Column>
+                                                        <table:Column width="18rem" hAlign="Center" sortProperty="Zrfauf">
+                                                            <Label text="{i18n>referenceDocumentDescrip}" />
+                                                            <table:template>
+                                                                <Text text="{refDocumentsModel>Doctx}" />
+                                                            </table:template>
+                                                        </table:Column>
+                                                    </table:columns>
+                                                </table:Table>
+                                            </content>
+                                        </Panel>
+                                    </IconTabFilter>
+                                    <IconTabFilter text="{i18n>ISSUE_OUT_DETAIL}" key="attachments">
+                                        <Panel headerText="{i18n>PROCESS_STEPS}" headerLevel="H5">
+                                            <content>
+                                                <HBox>
+                                                    <Panel>
+                                                        <content>
+                                                            <HBox>
+                                                                <VBox class="sapUiMediumMarginEnd">
+                                                                    <Button enabled="{infoModel>/DR1}" text="{i18n>issueOut}" width="12rem" />
+                                                                </VBox>
+                                                                <VBox visible="{infoModel>/visibleProcessSteps}">
+                                                                    <HBox alignContent="Center">
+                                                                        <Label text="{i18n>MATERIAL_DOC_ITEM}" width="12rem" textAlign="Begin" class="sapUiSmallMarginTop" />
+                                                                        <Input value="{itemDetailModel>/Mbiot}" editable="false" width="12rem" />
+                                                                        <Text text="/" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd" />
+                                                                        <Input value="{itemDetailModel>/Mziot}" editable="false" width="5rem" />
+                                                                        <Text text="{i18n>POSTING_DATE}" width="12rem" textAlign="Begin" class="sapUiLargeMarginBegin sapUiSmallMarginTop" />
+                                                                        <Input value="{itemDetailModel>/Mjiot}" editable="false" width="12rem" />
+                                                                    </HBox>
+                                                                </VBox>
+                                                            </HBox>
+                                                        </content>
+                                                    </Panel>
+                                                </HBox>
+                                            </content>
+                                        </Panel>
+                                        <Panel>
+                                            <content>
+                                                <VBox class="sapUiSmallMargin">
+                                                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsL="2" labelSpanXL="4" labelSpanL="4" labelSpanM="4" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4">
+                                                        <form:content>
+                                                            <!-- Transport Detail -->
+                                                            <core:Title text="{i18n>transportDetail}" />
+                                                            <Label text="{i18n>TRANSPORT_COMPANY}" />
+                                                            <Input editable="{infoModel>/DR0}" value="{itemDetailModel>/Ztrlif}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>driversName}" />
+                                                            <Input editable="{infoModel>/DR0}" value="{itemDetailModel>/ZnameDrvr}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>altDriversName}" />
+                                                            <Input editable="{infoModel>/DR0}" value="{itemDetailModel>/ZnameCodrvr}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>trucksLicense}" />
+                                                            <Input editable="{infoModel>/DR0}" value="{itemDetailModel>/ZvehicleRegNumb}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>trailrsLicPlt}" />
+                                                            <Input editable="{infoModel>/DR0}" value="{itemDetailModel>/ZtrailerRegNumb}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>driversIdNumber}" />
+                                                            <Input editable="{infoModel>/DR0}" value="{itemDetailModel>/ZdrvrIdNum}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>altDriverIdNumber}" />
+                                                            <Input editable="{infoModel>/DR0}" value="{itemDetailModel>/ZdrvrIdNumAlt}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>transptCoTelNum}" />
+                                                            <Input editable="{infoModel>/DR0}" value="{itemDetailModel>/ZtrlifTelnr}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <!-- Approval -->
+                                                            <core:Title text="{i18n>approval}" />
+                                                            <Label text="{i18n>approvedBy}" />
+                                                            <Input editable="{infoModel>/DR0}" value="{itemDetailModel>/Zapdby}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>issuedBy}" />
+                                                            <Input editable="false" value="{itemDetailModel>/Zisdby}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                        </form:content>
+                                                    </form:SimpleForm>
+                                                </VBox>
+                                            </content>
+                                        </Panel>
+                                    </IconTabFilter>
+                                    <IconTabFilter text="{i18n>RECEIVE_BACK_DETAIL}" key="notes">
+                                        <Panel headerText="{i18n>PROCESS_STEPS}" headerLevel="H5">
+                                            <content>
+                                                <HBox>
+                                                    <Panel>
+                                                        <content>
+                                                            <HBox>
+                                                                <VBox class="sapUiMediumMarginEnd">
+                                                                    <Button enabled="{infoModel>/RB1}" text="{i18n>receiveFromVendor}" width="12rem" />
+                                                                </VBox>
+                                                                <VBox visible="{infoModel>/visibleProcessSteps}">
+                                                                    <HBox alignContent="Center">
+                                                                        <Label text="{i18n>MATERIAL_DOC_ITEM}" width="12rem" textAlign="Begin" class="sapUiSmallMarginTop" />
+                                                                        <Input editable="false" value="{itemDetailModel>/Mbrfv}" width="12rem" />
+                                                                        <Text text="/" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd" />
+                                                                        <Input editable="false" value="{itemDetailModel>/Mzrfv}" width="5rem" />
+                                                                        <Text text="{i18n>POSTING_DATE}" width="12rem" textAlign="Begin" class="sapUiLargeMarginBegin sapUiSmallMarginTop" />
+                                                                        <Input value="{itemDetailModel>/Mjrfv}" width="12rem" />
+                                                                    </HBox>
+                                                                </VBox>
+                                                            </HBox>
+                                                        </content>
+                                                    </Panel>
+                                                </HBox>
+                                            </content>
+                                        </Panel>
+                                        <Panel>
+                                            <content>
+                                                
+                                                <form:Form editable="true">
+                                                    <form:layout>
+                                                        <form:ColumnLayout columnsM="2" columnsL="3" columnsXL="6" />
+                                                    </form:layout>
+                                                    <form:formContainers>
+                                                        <form:FormContainer>
+                                                            <form:formElements>
+                                                                <form:FormElement label="{i18n>inspectionDone}">
+                                                                    <form:fields>
+                                                                        <CheckBox editable="{infoModel>/RB0}" selected="{itemDetailModel>/ZinspDone}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="{i18n>inspectionNote}">
+                                                                    <form:fields>
+                                                                        <TextArea value="" editable="false"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="{i18n>inspectedBy}">
+                                                                    <form:fields>
+                                                                        <Input editable="{infoModel>/RB0}" value="{itemDetailModel>/Zerstelnum}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                        <form:FormContainer>
+                                                            <form:formElements>
+                                                                <form:FormElement label="{i18n>inspectionDateTime}">
+                                                                    <form:fields>
+                                                                        <Input editable="{infoModel>/RB0}" value="{itemDetailModel>/Zersteldat}" />
+                                                                        <Input editable="{infoModel>/RB0}" value="{itemDetailModel>/Zerstelzeit}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                    </form:formContainers>
+                                                </form:Form>
+                                                <!-- <VBox class="sapUiSmallMargin">
+                                                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsL="1" labelSpanXL="4" labelSpanL="4" labelSpanM="4" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4">
+                                                        <form:content>
+                                                            <core:Title text="{i18n>qualityInspection}" />
+                                                            <Label text="{i18n>inspectionDone}" />
+                                                            <CheckBox editable="{infoModel>/editableField}" selected="{itemDetailModel>/ZinspDone}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </CheckBox>
+                                                            <Label text="{i18n>inspectionNote}" />
+                                                            <TextArea editable="{infoModel>/editableField}" value="PENDING">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </TextArea>
+                                                            <Label text="{i18n>inspectedBy}" />
+                                                            <Input editable="{infoModel>/editableField}" value="{itemDetailModel>/ZnameCodrvr}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="{i18n>inspectionDateTime}" />
+                                                            <Input editable="{infoModel>/editableField}" value="{itemDetailModel>/Zersteldat}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                            <Label text="" />
+                                                            <Input editable="{infoModel>/editableField}" value="{itemDetailModel>/Zerstelzeit}">
+                                                                <layoutData>
+                                                                    <l:GridData span="XL8 L8 M6 S6" />
+                                                                </layoutData>
+                                                            </Input>
+                                                        </form:content>
+                                                    </form:SimpleForm>
+                                                </VBox> -->
+                                            </content>
+                                        </Panel>
+                                    </IconTabFilter>
+                                    <IconTabFilter text="{i18n>CLOSE_SCRAP}" key="people">
+                                        <Panel headerText="{i18n>processOptions}" headerLevel="H5">
+                                            <content>
+                                                <HBox>
+                                                    <VBox class="sapUiMediumMarginEnd">
+                                                        <RadioButtonGroup id="GroupA">
+                                                            <RadioButton text="{i18n>returnStock}" editable="{infoModel>/CL0}" selected="{itemDetailModel>/Zretlg}" />
+                                                            <RadioButton text="{i18n>itemScrapped}" editable="{infoModel>/CL0}" selected="{itemDetailModel>/Zretscrp}" />
+                                                        </RadioButtonGroup>
+                                                    </VBox>
+                                                </HBox>
+                                            </content>
+                                        </Panel>
+                                        <Panel headerText="{i18n>returnStock}" headerLevel="H5">
+                                            <content>
+                                                <HBox>
+                                                    <Panel>
+                                                        <content>
+                                                            <HBox>
+                                                                <VBox class="sapUiMediumMarginEnd">
+                                                                    <Button enabled="{infoModel>/CL1}" text="{i18n>returnStock}" width="12rem" />
+                                                                </VBox>
+                                                                <VBox visible="{infoModel>/visibleProcessSteps}">
+                                                                    <HBox alignContent="Center">
+                                                                        <Label text="{i18n>MATERIAL_DOC_ITEM}" width="12rem" textAlign="Begin" class="sapUiSmallMarginTop" />
+                                                                        <Input editable="false" value="{itemDetailModel>/Mbist}" width="12rem" />
+                                                                        <Text text="/" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd" />
+                                                                        <Input editable="false" value="{itemDetailModel>/Mzist}" width="5rem" />
+                                                                        <Text text="{i18n>POSTING_DATE}" width="12rem" textAlign="Begin" class="sapUiLargeMarginBegin sapUiSmallMarginTop" />
+                                                                        <Input editable="false" value="{itemDetailModel>/Mjist}" width="12rem" />
+                                                                    </HBox>
+                                                                </VBox>
+                                                            </HBox>
+                                                        </content>
+                                                    </Panel>
+                                                </HBox>
+                                                <form:Form editable="true">
+                                                    <form:layout>
+                                                        <form:ColumnLayout columnsM="2" columnsL="3" columnsXL="6" />
+                                                    </form:layout>
+                                                    <form:formContainers>
+                                                        <form:FormContainer>
+                                                            <form:formElements>
+                                                                <form:FormElement label="{i18n>closedBy}">
+                                                                    <form:fields>
+                                                                        <Input editable="{infoModel>/CL1}" value="{itemDetailModel>/Zretclsby}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                    </form:formContainers>
+                                                </form:Form>
+                                            </content>
+                                        </Panel>
+                                        <Panel headerText="{i18n>scrapping}" headerLevel="H5">
+                                            <content>
+                                                <HBox>
+                                                    <Panel>
+                                                        <content>
+                                                            <HBox>
+                                                                <VBox class="sapUiMediumMarginEnd">
+                                                                    <Button enabled="{infoModel>/SC1}" text="{i18n>scrapItem}" width="12rem" />
+                                                                </VBox>
+                                                                <VBox visible="{infoModel>/visibleProcessSteps}">
+                                                                    <HBox alignContent="Center">
+                                                                        <Label text="{i18n>MATERIAL_DOC_ITEM}" width="12rem" textAlign="Begin" class="sapUiSmallMarginTop" />
+                                                                        <Input editable="false" value="{itemDetailModel>/Mbscr}" width="12rem" />
+                                                                        <Text text="/" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd" />
+                                                                        <Input editable="false" value="{itemDetailModel>/Mzscr}" width="5rem" />
+                                                                        <Text text="{i18n>POSTING_DATE}" width="12rem" textAlign="Begin" class="sapUiLargeMarginBegin sapUiSmallMarginTop" />
+                                                                        <Input editable="false" value="{itemDetailModel>/Mjscr}" width="12rem" />
+                                                                    </HBox>
+                                                                </VBox>
+                                                            </HBox>
+                                                        </content>
+                                                    </Panel>
+                                                </HBox>
+                                                <form:Form editable="true">
+                                                    <form:layout>
+                                                        <form:ColumnLayout columnsM="2" columnsL="3" columnsXL="6" />
+                                                    </form:layout>
+                                                    <form:formContainers>
+                                                        <form:FormContainer>
+                                                            <form:formElements>
+                                                                <form:FormElement label="{i18n>apprObtScrap}">
+                                                                    <form:fields>
+                                                                        <CheckBox editable="{infoModel>/SC1}" selected="{itemDetailModel>/Zscrpapd}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="{i18n>apprDocAttached}">
+                                                                    <form:fields>
+                                                                        <CheckBox editable="{infoModel>/SC1}" selected="{itemDetailModel>/ZscrpaprAtt}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="{i18n>scrappedBy}">
+                                                                    <form:fields>
+                                                                        <Input editable="{infoModel>/SC1}" value="{itemDetailModel>/Zretscrapby}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                    </form:formContainers>
+                                                </form:Form>
+                                            </content>
+                                        </Panel>
+                                    </IconTabFilter>
+                                    <IconTabFilter text="{i18n>ADMIN_INFO}" key="people">
+                                        <Panel headerText="{i18n>STATUS}" headerLevel="H5">
+                                            <content>
+                                                <HBox>
+                                                    <VBox class="sapUiMediumMarginEnd">
+                                                        <CheckBox editable="false" selected="{itemDetailModel>/Zreiss}" text="{i18n>btn_re_issued}" />
+                                                        <CheckBox editable="false" selected="{itemDetailModel>/Zwriss}" text="{i18n>btn_wrong_issued}" />
+                                                        <CheckBox editable="false" selected="{itemDetailModel>/Zcanc}" text="{i18n>btn_cancelled}" />
+                                                        <CheckBox editable="false" selected="{itemDetailModel>/Zprtd}" text="{i18n>btn_printed}" />
+                                                        <CheckBox editable="false" selected="{itemDetailModel>/Zrprt}" text="{i18n>btn_reprinted}" />
+                                                    </VBox>
+                                                </HBox>
+                                            </content>
+                                        </Panel>
+                                        <Panel headerText="{i18n>returnStock}" headerLevel="H5">
+                                            <content>
+                                                <form:Form editable="true">
+                                                    <form:layout>
+                                                        <form:ColumnLayout columnsM="2" columnsL="3" columnsXL="6" />
+                                                    </form:layout>
+                                                    <form:formContainers>
+                                                        <form:FormContainer>
+                                                            <form:formElements>
+                                                                <form:FormElement label="{i18n>CREATED_BY}">
+                                                                    <form:fields>
+                                                                        <Input editable="false" value="{itemDetailModel>/Zernam}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="{i18n>CREATED_ON}">
+                                                                    <form:fields>
+                                                                        <Input editable="false" value="{itemDetailModel>/Zerdat}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="{i18n>CREATED_AT}">
+                                                                    <form:fields>
+                                                                        <Input editable="false" value="{itemDetailModel>/Zerzeit}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="{i18n>CHANGED_BY}">
+                                                                    <form:fields>
+                                                                        <Input editable="false" value="{itemDetailModel>/Zaenam}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="{i18n>CHANGED_ON}">
+                                                                    <form:fields>
+                                                                        <Input editable="false" value="{itemDetailModel>/Zaedat}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="{i18n>CHANGED_AT}">
+                                                                    <form:fields>
+                                                                        <Input editable="false" value="{itemDetailModel>/Zaezeit}" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                    </form:formContainers>
+                                                </form:Form>
+                                            </content>
+                                        </Panel>
+                                    </IconTabFilter>
+                                </items>
+                            </IconTabBar>
+                        </content>
+                    </Page>
+                </NavContainer>
+            </f:content>
+        </f:DynamicPage>
+    </App>
+</mvc:View>

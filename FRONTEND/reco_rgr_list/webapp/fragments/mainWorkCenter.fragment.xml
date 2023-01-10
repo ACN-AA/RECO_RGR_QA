@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="{i18n>MAIN_WORK_CENTER}"
+		items="{workCenterF4Model>/}"
+		search="_handleValueHelpSearchWorkCenter"
+		confirm="_handleValueHelpClose"
+		cancel="_handleValueHelpClose">
+		<StandardListItem
+			title="{workCenterF4Model>Ktext}"
+			description="{workCenterF4Model>Arbpl}" />
+	</SelectDialog>
+</core:FragmentDefinition>

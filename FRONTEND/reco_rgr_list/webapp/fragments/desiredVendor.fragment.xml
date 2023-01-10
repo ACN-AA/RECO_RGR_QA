@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="{i18n>DESIRED_VENDOR}"
+		items="{vendorF4Model>/}"
+		search="_handleValueHelpSearchDesiredVendor"
+		confirm="_handleValueHelpClose"
+		cancel="_handleValueHelpClose">
+		<StandardListItem
+			title="{vendorF4Model>Loevm}"
+			description="{vendorF4Model>Lifnr}" />
+	</SelectDialog>
+</core:FragmentDefinition>

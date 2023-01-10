@@ -1,0 +1,378 @@
+<mvc:View controllerName="recorgrlist.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:l="sap.ui.layout"
+    xmlns:c="sap.ui.core">
+    <App id="app">
+        <NavContainer id="navCon">
+            <Page id="page1" title="{i18n>title}">
+                <content>
+                    <fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search="getData" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem label="{i18n>RELEASE_STATUS}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="A">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_release_status>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_release_status>status}" text="{model_release_status>desc}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>RELEASE_TYPE}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="B">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_release_type>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_release_type>status}" text="{model_release_type>desc}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>RELEASE_NUMBER}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="C">
+                                <fb:control>
+                                    <MultiInput placeholder="{i18n>ENTER_SEARCH}" width="auto" busyIndicatorSize="Medium" busyIndicatorDelay="0" showValueHelp="false" suggestionItems="{
+                                                            path: 'model_release_number>/',
+                                                            sorter: { path: 'status' }
+                                                        }">
+                                        <c:ListItem key="{model_release_number>status}" text="{model_release_number>desc}" />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>CHANGE_OUT_ORDER_NUMBER}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="D">
+                                <fb:control>
+                                    <MultiInput placeholder="{i18n>ENTER_SEARCH}" width="auto" busyIndicatorSize="Medium" busyIndicatorDelay="0" showValueHelp="false" suggestionItems="{
+                                                            path: 'model_change_order_number>/',
+                                                            sorter: { path: 'status' }
+                                                        }">
+                                        <c:ListItem key="{model_change_order_number>status}" text="{model_change_order_number>desc}" />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>REFURBISHMENT_ORDER_NUMBER}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="E">
+                                <fb:control>
+                                    <MultiInput placeholder="{i18n>ENTER_SEARCH}" width="auto" busyIndicatorSize="Medium" busyIndicatorDelay="0" showValueHelp="false" suggestionItems="{
+                                                            path: 'model_refurbishment_order_number>/',
+                                                            sorter: { path: 'status' }
+                                                        }">
+                                        <c:ListItem key="{model_refurbishment_order_number>status}" text="{model_refurbishment_order_number>desc}" />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>CHANGE_OUT_PURCHASE_ORDER}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="F">
+                                <fb:control>
+                                    <MultiInput placeholder="{i18n>ENTER_SEARCH}" width="auto" busyIndicatorSize="Medium" busyIndicatorDelay="0" showValueHelp="false" suggestionItems="{
+                                                            path: 'model_change_out_purchase_order>/',
+                                                            sorter: { path: 'status' }
+                                                        }">
+                                        <c:ListItem key="{model_change_out_purchase_order>status}" text="{model_change_out_purchase_order>desc}" />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>COMPANY_CODE}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="G">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_company_code>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_company_code>status}" text="{model_company_code>desc}" />
+                                    </MultiComboBox>
+                                    <!--<MultiComboBox showSecondaryValues="true" enabled="false" items="{
+                                                path: 'REQUEST_TYPEModel>/',
+                                                sorter: { path: 'value' }                                        
+                                            }">
+                                        <c:ListItem key="{REQUEST_TYPEModel>value}" text="{path: 'REQUEST_TYPEModel>value', formatter: '.Formatter.formatType'}"/>
+                                    </MultiComboBox>-->
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>PLANNING_PLANT}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="H">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_planning_plant>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_planning_plant>status}" text="{model_planning_plant>desc}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>PLANNER_GROUP}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="I">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_planner_group>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_planner_group>status}" text="{model_planner_group>desc}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>MAIN_WORK_CENTER}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="J">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_main_work_center>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_main_work_center>status}" text="{model_main_work_center>desc}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>PLANT_WORK_CENTER}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="K">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_plant_work_center>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_plant_work_center>status}" text="{model_plant_work_center>desc}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>MAINTENEANCE_PLANT}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="L">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_mainteneance_plant>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_mainteneance_plant>status}" text="{model_mainteneance_plant>desc}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>MATERIAL}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="M">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_material>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_material>status}" text="{model_material>desc}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>DESIRED_VENDOR}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="N">
+                                <fb:control>
+                                    <MultiComboBox placeholder="{i18n>PLEASE_SELECT}" items="{model_desired_vendor>/}" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish" width="auto" value="" showSecondaryValues="false" busyIndicatorSize="Medium" busyIndicatorDelay="0">
+                                        <c:ListItem key="{model_desired_vendor>status}" text="{model_desired_vendor>desc}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>CREATED_BY}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="O">
+                                <fb:control>
+                                    <MultiInput placeholder="{i18n>ENTER_SEARCH}" width="auto" busyIndicatorSize="Medium" busyIndicatorDelay="0" showValueHelp="false" suggestionItems="{
+                                                            path: 'model_created_by>/',
+                                                            sorter: { path: 'status' }
+                                                        }">
+                                        <c:ListItem key="{model_created_by>status}" text="{model_created_by>desc}" />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>CREATED_ON_FROM}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="P">
+                                <fb:control>
+                                    <DatePicker id="CREATED_ON_FROM" displayFormat="YYYY/MM/dd" class="sapUiSmallMarginEnd" change="validateFrom">
+                                        <layoutData>
+                                            <l:GridData span="L2 M2" />
+                                        </layoutData>
+                                    </DatePicker>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>CREATED_ON_TO}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="Q">
+                                <fb:control>
+                                    <DatePicker id="CREATED_ON_TO" displayFormat="YYYY/MM/dd" class="sapUiSmallMarginEnd" change="validateFrom">
+                                        <layoutData>
+                                            <l:GridData span="L2 M2" />
+                                        </layoutData>
+                                    </DatePicker>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>CHANGED_BY}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="R">
+                                <fb:control>
+                                    <MultiInput placeholder="{i18n>ENTER_SEARCH}" width="auto" busyIndicatorSize="Medium" busyIndicatorDelay="0" showValueHelp="false" suggestionItems="{
+                                                            path: 'model_changed_by>/',
+                                                            sorter: { path: 'status' }
+                                                        }">
+                                        <c:ListItem key="{model_changed_by>status}" text="{model_changed_by>desc}" />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>CREATED_ON_TO}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="S">
+                                <fb:control>
+                                    <DatePicker id="CHANGED_ON_FROM" displayFormat="YYYY/MM/dd" class="sapUiSmallMarginEnd" change="validateFrom">
+                                        <layoutData>
+                                            <l:GridData span="L2 M2" />
+                                        </layoutData>
+                                    </DatePicker>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem label="{i18n>CREATED_ON_TO}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="T">
+                                <fb:control>
+                                    <DatePicker id="CHANGED_ON_TO" displayFormat="YYYY/MM/dd" class="sapUiSmallMarginEnd" change="validateFrom">
+                                        <layoutData>
+                                            <l:GridData span="L2 M2" />
+                                        </layoutData>
+                                    </DatePicker>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                    <Table xmlns="sap.ui.table" rows="{modelItems>/}" class="sapUiResponsiveContentPadding" enableColumnReordering="false" id="_TABLE" selectionMode="None" rowSelectionChange="onLineItemSelected" visibleRowCount="9">
+                        <extension>
+                            <Toolbar xmlns="sap.m" id="lineItemsToolbar">
+                                <content>
+                                    <ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+                                    <CheckBox text="{i18n>btn_re_issued}" valueState="Information" enabled="true" selected="false" />
+                                    <CheckBox text="{i18n>btn_wrong_issued}" valueState="Information" enabled="true" selected="false" />
+                                    <CheckBox text="{i18n>btn_cancelled}" valueState="Information" enabled="true" selected="false" />
+                                    <CheckBox text="{i18n>btn_printed}" valueState="Information" enabled="true" selected="false" />
+                                    <CheckBox text="{i18n>btn_reprinted}" valueState="Information" enabled="true" selected="false" />
+                                    <Button icon="sap-icon://excel-attachment" press="exportResult_upload"/>
+                                    <Button icon="sap-icon://action-settings" press="onPersoButtonPressed"/>
+                                    <!--<Button tooltip="{i18n>oToolbar_Sort}" icon="sap-icon://sort" press="handleSortButtonPressed"/>-->
+                                </content>
+                            </Toolbar>
+                        </extension>
+                        <columns>
+                            <Column  width="8rem" hAlign="Center" sortProperty="STATUS">
+                                <Label xmlns="sap.m" text="{i18n>STATUS}"/>
+                                <template  >
+                                    <ObjectStatus xmlns="sap.m" text="{modelItems>STATUS_TEXT}" inverted="true" icon="{modelItems>STATUS_ICON}" state="{modelItems>STATUS}" active="true" press="handlePopoverPress" class="sapUiResponsiveContentPadding"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="RELEASE_NUMBER">
+                                <Label xmlns="sap.m" text="{i18n>RELEASE_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>RELEASE_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="RELEASE_VERSION_NUMBER">
+                                <Label xmlns="sap.m" text="{i18n>RELEASE_VERSION_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>RELEASE_VERSION_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="REFURBISHMENT_ORDER_NUMBER">
+                                <Label xmlns="sap.m" text="{i18n>REFURBISHMENT_ORDER_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>REFURBISHMENT_ORDER_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="REFURBISHMENT_ORDER_NUMBER">
+                                <Label xmlns="sap.m" text="{i18n>REFURBISHMENT_ORDER_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>REFURBISHMENT_ORDER_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="REFURBISHMENT_ORDER_OPERATION">
+                                <Label xmlns="sap.m" text="{i18n>REFURBISHMENT_ORDER_OPERATION}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>REFURBISHMENT_ORDER_OPERATION}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_ORDER_NUMBER">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_ORDER_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_ORDER_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_DESCRIPTION">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_DESCRIPTION}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_DESCRIPTION}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_ORDER_OPERATION">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_ORDER_OPERATION}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_ORDER_OPERATION}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="RELEASE_TYPE">
+                                <Label xmlns="sap.m" text="{i18n>GATE_RELEASE_TYPE}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>GATE_RELEASE_TYPE}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_COMPONENT_RESERVATION" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_COMPONENT_RESERVATION}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_COMPONENT_RESERVATION}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_COMPONENT_RESERVATION_ITEM" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_COMPONENT_RESERVATION_ITEM}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_COMPONENT_RESERVATION_ITEM}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="RELEASE_STATUS" visible="true">
+                                <Label xmlns="sap.m" text="{i18n>RELEASE_STATUS}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>RELEASE_STATUS}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="RELEASE_STATUS_TEXT" visible="true">
+                                <Label xmlns="sap.m" text="{i18n>RELEASE_STATUS_TEXT}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>RELEASE_STATUS_TEXT}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="MATERIAL" visible="true">
+                                <Label xmlns="sap.m" text="{i18n>MATERIAL}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>MATERIAL}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="MATERIAL_DESCRIPTION" visible="true">
+                                <Label xmlns="sap.m" text="{i18n>MATERIAL_DESCRIPTION}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>MATERIAL_DESCRIPTION}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="DESIRED_VENDOR" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>DESIRED_VENDOR}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>DESIRED_VENDOR}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="VENDOR_NAME" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>VENDOR_NAME}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>VENDOR_NAME}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_PURCHASE_REQUISITION_NUMBER" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_PURCHASE_REQUISITION_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_PURCHASE_REQUISITION_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_PURCHASE_REQUISITION_ITEM" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_PURCHASE_REQUISITION_ITEM}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_PURCHASE_REQUISITION_ITEM}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_PURCHASE_ORDER_NUMBER" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_PURCHASE_ORDER_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_PURCHASE_ORDER_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_PURCHASE_ORDER_ITEM" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_PURCHASE_ORDER_ITEM}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_PURCHASE_ORDER_ITEM}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="CHANGE_OUT_PO_RETURN_ITEM_NUMBER" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>CHANGE_OUT_PO_RETURN_ITEM_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>CHANGE_OUT_PO_RETURN_ITEM_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="RETURN_ITEM_CREATION_DATE" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>RETURN_ITEM_CREATION_DATE}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>RETURN_ITEM_CREATION_DATE}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="RETURN_DELIVERY_NUMBER" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>RETURN_DELIVERY_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>RETURN_DELIVERY_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="RETURN_DELIVERY_ITEM_NUMBER" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>RETURN_DELIVERY_ITEM_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>RETURN_DELIVERY_ITEM_NUMBER}"/>
+                                </template>
+                            </Column>
+                            <Column  width="8rem" hAlign="Center" sortProperty="RETURN_DELIVERY_NUMBER" visible="false">
+                                <Label xmlns="sap.m" text="{i18n>RETURN_DELIVERY_NUMBER}"/>
+                                <template>
+                                    <Text xmlns="sap.m" text="{modelItems>RETURN_DELIVERY_NUMBER}"/>
+                                </template>
+                            </Column>
+
+                        </columns>
+                    </Table>
+                </content>
+            </Page>
+            <Page id="page2" title="{i18n>title}">
+                <content />
+            </Page>
+        </NavContainer>
+    </App>
+</mvc:View>
