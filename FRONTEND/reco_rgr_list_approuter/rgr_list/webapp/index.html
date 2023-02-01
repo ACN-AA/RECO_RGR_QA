@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>App Title</title>
+    <style>
+        html, body, body > div, #container, #container-uiarea {
+            height: 100%;
+        }
+    </style>
+    <script
+        id="sap-ui-bootstrap"
+        src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+        data-sap-ui-versionedLibCss="true"
+        data-sap-ui-theme="AngloAmerican_Theme"  
+        data-sap-ui-theme-roots='{"AngloAmerican_Theme" : "/themes/themeroot/v1/UI5/"}'
+        data-sap-ui-resourceroots='{
+            "rgrlist": "./"
+        }'
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-async="true"
+        data-sap-ui-frameOptions="trusted"
+    ></script>
+    <script id="locate-reuse-libs" src="./utils/locate-reuse-libs.js"
+        data-sap-ui-manifest-uri="./manifest.json"
+        data-sap-ui-componentName="rgrlist">
+    </script> 
+</head>
+<body class="sapUiBody" id="content">
+    <div
+        data-sap-ui-component
+        data-name="rgrlist"
+        data-id="container"
+        data-settings='{"id" : "rgrlist"}'
+        data-handle-validation="true"
+    ></div>
+</body>
+</html>

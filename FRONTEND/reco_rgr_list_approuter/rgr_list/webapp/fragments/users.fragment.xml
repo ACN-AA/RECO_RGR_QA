@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="{i18n>seleccionar}"
+		items="{premnModel>/}"
+		search="_handleValueHelpSearchUsers"
+		confirm="_handleValueHelpCloseUsers"
+		cancel="_handleValueHelpCloseUsers">
+		<StandardListItem
+			title="{premnModel>Pernr}"
+			description="{premnModel>Vorna} {premnModel>Nachn}" />
+	</SelectDialog>
+</core:FragmentDefinition>

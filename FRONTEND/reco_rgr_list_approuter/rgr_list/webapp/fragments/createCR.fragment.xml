@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog id="idDialogRONCreate" title="{i18n>createCR}:" contentWidth="25rem" resizable="true" draggable="true">
+        <VBox class="sapUiResponsiveMargin" >
+            <Label text="{i18n>REFURBISHMENT_ORDER_NUMBER}" />
+			<Input id="idIRefurbOrderNumber" valueHelpOnly="true" type="Text" placeholder="{i18n>PLEASE_SELECT}" showValueHelp="true" valueHelpIconSrc="sap-icon://arrow-left" valueHelpRequest="handleValueHelpCreateCR" />
+        </VBox>
+        <beginButton>
+            <Button text="{i18n>create}" type="Accept" press="createCR"></Button>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>cancelar}" type="Reject" press="closeDialog"></Button>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

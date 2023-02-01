@@ -1,0 +1,20 @@
+{
+  "xsappname": "reco_rgr_list",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.RecoList",
+      "description": "Rol Reco RGR List"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "ROL_RECO_RGR_LIST",
+      "description": "Rol Reco RGR List",
+      "scope-references": [
+        "$XSAPPNAME.RecoList"
+      ]
+    }
+  ]
+}

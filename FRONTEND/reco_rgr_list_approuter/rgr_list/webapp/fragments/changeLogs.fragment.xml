@@ -1,0 +1,160 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:table="sap.ui.table">
+    <table:Table id="table" rows="{ChangeDocsModel>/}" rowActionCount="1" class="sapUiResponsiveContentPadding" enableColumnReordering="false" selectionMode="None" rowSelectionChange="onLineItemSelected" visibleRowCount="{infoModel>/countChangeLogVisible}">
+        <table:extension>
+            <Toolbar id="lineItemsToolbar">
+                <content>
+                    <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+                    <Button icon="sap-icon://excel-attachment" press="exportWorksheetChangeLogs" />
+                    <Button icon="sap-icon://action-settings" press="onPersoButtonPressedChangeLogs" />
+                    <!--<Button tooltip="{i18n>oToolbar_Sort}" icon="sap-icon://sort" press="handleSortButtonPressed"/>-->
+                </content>
+            </Toolbar>
+        </table:extension>
+        <table:columns>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocobjectclass">
+                <Label text="{i18n>changeDocObj}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocobjectclass}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocobject">
+                <Label text="{i18n>objectValue}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocobject}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocument" visible="false">
+                <Label text="{i18n>documentNumber}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocument}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Databasetable" visible="false">
+                <Label text="{i18n>tableName}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Databasetable}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedoctablekey">
+                <Label text="{i18n>tableKey}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedoctablekey}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocdatabasetablefield" visible="false">
+                <Label text="{i18n>fieldName}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocdatabasetablefield}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocchangetype">
+                <Label text="{i18n>changeInd}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocchangetype}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Createdbyuser">
+                <Label text="{i18n>user}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Createdbyuser}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="NameTextc" >
+                <Label text="{i18n>fullName}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>NameTextc}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Creationdate" visible="false">
+                <Label text="{i18n>date}" />
+                <table:template>
+                    <Text text="{path: 'ChangeDocsModel>Creationdate', formatter: '.Formatter.formatDateSAP'}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Creationtime">
+                <Label text="{i18n>time}" />
+                <table:template>
+                    <Text text="{ path: 'ChangeDocsModel>/Creationtime', type: 'sap.ui.model.odata.type.Time'}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Createdon"  visible="false">
+                <Label text="{i18n>createdOn}" />
+                <table:template>
+                    <Text text="{path: 'ChangeDocsModel>Createdon', formatter: '.Formatter.formatDateSAP'}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedoclanguagekey" visible="false">
+                <Label text="{i18n>language}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedoclanguagekey}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedoclanguage">
+                <Label text="{i18n>name}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedoclanguage}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changetransactioncode" visible="false">
+                <Label text="{i18n>transaction}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changetransactioncode}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedoctablekeylong" visible="false">
+                <Label text="{i18n>tableKeys}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedoctablekeylong}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocnewfieldvalue">
+                <Label text="{i18n>changeDocNewFieldValue}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocnewfieldvalue}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocpreviousfieldvalue">
+                <Label text="{i18n>changeDocPreviousFieldValue}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocpreviousfieldvalue}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocobjectdescription">
+                <Label text="{i18n>objectText}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocobjectdescription}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocumentstringnew">
+                <Label text="{i18n>changeDocNewValue}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocumentstringnew}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocumentstringold">
+                <Label text="{i18n>changeDocOldValue}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocumentstringold}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocnewshortstring" visible="false">
+                <Label text="{i18n>changeDocNewShort}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocnewshortstring}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Changedocoldshortstring" visible="false">
+                <Label text="{i18n>changeDocOldShort}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Changedocoldshortstring}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" hAlign="Center" sortProperty="Language" visible="false">
+                <Label text="{i18n>language}" />
+                <table:template>
+                    <Text text="{ChangeDocsModel>Language}" />
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

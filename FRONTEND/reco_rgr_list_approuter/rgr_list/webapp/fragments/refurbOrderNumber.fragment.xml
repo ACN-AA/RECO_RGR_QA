@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+	contentWidth="25rem"
+		resizable="true"
+		title="{i18n>REFURBISHMENT_ORDER_NUMBER}"
+		items="{RefurbOrdF4Model>/}"
+		search="_handleValueHelpSearchOrdeb"
+		confirm="_handleValueHelpClose"
+		cancel="_handleValueHelpClose">
+		<StandardListItem
+			title="{RefurbOrdF4Model>Maintenanceorder}"
+			description="{RefurbOrdF4Model>Maintenanceorderdesc}" />
+	</SelectDialog>
+</core:FragmentDefinition>

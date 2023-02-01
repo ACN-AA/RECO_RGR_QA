@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="{i18n>RFQ}"
+		items="{rfqF4Model>/}"
+		search="_handleValueHelpSearchRFQ"
+		confirm="_handleValueHelpCloseRFQ"
+		cancel="_handleValueHelpCloseRFQ">
+		<StandardListItem
+			title="{rfqF4Model>Ex_Zrfbnfn}"
+			description="{rfqF4Model>Ex_Anfps} - {rfqF4Model>Ex_Lifnam}" />
+	</SelectDialog>
+</core:FragmentDefinition>

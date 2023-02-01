@@ -1,0 +1,90 @@
+_schema-version: "3.2"
+ID: reco_rgr_list
+version: 0.0.1
+modules:
+- name: reco-rgr-list-approuter
+  type: approuter.nodejs
+  path: reco-rgr-list-approuter
+  requires:
+  - name: reco_rgr_list_html_repo_runtime
+  - name: uaa_reco_rgr_list
+  - name: reco_rgr_list_theming
+  - name: RECO_Connectivity
+  - name: reco_rgr_list-destination-service
+    group: destinations
+    properties:
+      forwardAuthToken: false
+      name: ui5
+      url: https://ui5.sap.com
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: reco_rgr_list_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: reco_rgr_list_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - rgrlist.zip
+      name: rgrlist
+      target-path: resources/
+- name: rgrlist
+  type: html5
+  path: rgr_list
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: reco_rgr_list_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: uaa_reco_rgr_list
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: reco_rgr_list-xsuaa-service
+    service-plan: application
+- name: reco_rgr_list_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: reco_rgr_list-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: reco_rgr_list-destination-service
+    service-plan: lite
+- name: RECO_Connectivity
+  type: org.cloudfoundry.existing-service
+- name: reco_rgr_list_theming
+  parameters:
+    service: theming
+    service-plan: standard
+  type: org.cloudfoundry.managed-service
+parameters:
+  deploy_mode: html5-repo
