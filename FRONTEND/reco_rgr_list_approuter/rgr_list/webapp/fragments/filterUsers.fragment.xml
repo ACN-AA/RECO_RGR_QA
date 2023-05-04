@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+    <Dialog id="idDialogRONCreate" title="{i18n>seleccionar}:" contentWidth="25rem" resizable="true" draggable="true">
+        <VBox class="sapUiResponsiveMargin" >
+            <Label text="{i18n>firstName}" />
+			<Input id="idIFirstName" type="Text" />
+			<Label text="{i18n>lastName}" />
+			<Input id="idILastName" type="Text" />
+        </VBox>
+        <beginButton>
+            <Button text="{i18n>iconTab_Buscar}" press="handleValueHelpUsers"></Button>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>cancelar}" type="Reject" press="closeFilterUsers"></Button>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

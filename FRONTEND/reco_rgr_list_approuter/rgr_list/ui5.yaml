@@ -17,9 +17,9 @@ server:
           url: https://ui5.sap.com
         backend:
           - path: /sap
-            url: http://QP8.anglo.local:443
+            url: http://gszajnb638.anglo.local:443
             client: '300'
-            destination: AOPQP8300_PP
+            destination: AOPSS8300_PP
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

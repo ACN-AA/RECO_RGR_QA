@@ -50,6 +50,13 @@
                     </MultiComboBox>
                 </fb:control>
             </fb:FilterGroupItem>
+            <fb:FilterGroupItem label="{i18n>MAINTENEANCE_PLANT}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="L">
+                <fb:control>
+                    <MultiComboBox id="idMainteneancePlant" placeholder="{i18n>PLEASE_SELECT}" items="{plantF4Model>/}" showSecondaryValues="true">
+                        <core:ListItem key="{plantF4Model>Werks}" text="{plantF4Model>Name1}" additionalText="{plantF4Model>Werks}" />
+                    </MultiComboBox>
+                </fb:control>
+            </fb:FilterGroupItem>
             <fb:FilterGroupItem label="{i18n>PLANNER_GROUP}" visibleInFilterBar="true" groupName="Filters" groupTitle="Filters" name="I">
                 <fb:control>
                     <MultiComboBox id="idPlannerGroup" placeholder="{i18n>PLEASE_SELECT}" items="{planGroupF4Model>/}" showSecondaryValues="true">
@@ -65,13 +72,6 @@
             <fb:FilterGroupItem label="{i18n>PLANT_WORK_CENTER}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="K">
                 <fb:control>
                     <MultiComboBox id="idPlantWorkCenter" placeholder="{i18n>PLEASE_SELECT}" items="{plantF4Model>/}" showSecondaryValues="true">
-                        <core:ListItem key="{plantF4Model>Werks}" text="{plantF4Model>Name1}" additionalText="{plantF4Model>Werks}" />
-                    </MultiComboBox>
-                </fb:control>
-            </fb:FilterGroupItem>
-            <fb:FilterGroupItem label="{i18n>MAINTENEANCE_PLANT}" visibleInFilterBar="false" groupName="Filters" groupTitle="Filters" name="L">
-                <fb:control>
-                    <MultiComboBox id="idMainteneancePlant" placeholder="{i18n>PLEASE_SELECT}" items="{plantF4Model>/}" showSecondaryValues="true">
                         <core:ListItem key="{plantF4Model>Werks}" text="{plantF4Model>Name1}" additionalText="{plantF4Model>Werks}" />
                     </MultiComboBox>
                 </fb:control>

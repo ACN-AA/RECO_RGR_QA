@@ -30,14 +30,12 @@
                     </f:expandedContent>
                     <f:content>
                         <!-- <OverflowToolbar>
-                                <GenericTag text="SR" status="Error" press="onPressOpenPopover" design="StatusIconHidden">
-                                    <ObjectNumber number="2" unit="M" emphasized="false" state="Error" />
-                                </GenericTag>
-                            </OverflowToolbar> -->
+                            <ImageContent class="sapUiMediumMarginBegin" src="/utils/images/sapCompanyLogo.png" description="Logo"/>
+                        </OverflowToolbar> -->
                     </f:content>
                     <f:actions>
                         <Button id="createCR" text="{i18n>createCR}" press="createRefurbOrderNumberCreateDialog" />
-                        <Button id="changeDocs" text="{i18n>changeLog}" press="showChangeLogs" visible="false"/>
+                        <Button id="changeDocs" text="{i18n>changeLog}" press="showChangeLogs" visible="false" />
                         <MenuButton id="menuButton" visible="false" text="{i18n>STATUS}">
                             <menu>
                                 <Menu>
@@ -395,7 +393,7 @@
                                                             <!-- Approval -->
                                                             <core:Title text="{i18n>approval}" />
                                                             <Label text="{i18n>approvedBy}" />
-                                                            <Input id="idIApprovedBy" value="{itemDetailModel>/Zapdby}" editable="{infoModel>/DR0}" type="Text" showValueHelp="true" valueHelpOnly="true" valueHelpIconSrc="sap-icon://arrow-left" valueHelpRequest="handleValueHelpUsers">
+                                                            <Input id="idIApprovedBy" value="{itemDetailModel>/Zapdby}" editable="{infoModel>/DR0}" type="Text" showValueHelp="true" valueHelpOnly="true" valueHelpIconSrc="sap-icon://arrow-left" valueHelpRequest="handleValueHelpFilterUsers">
                                                                 <layoutData>
                                                                     <l:GridData span="XL8 L8 M6 S6" />
                                                                 </layoutData>
@@ -460,7 +458,16 @@
                                                                 </form:FormElement>
                                                                 <form:FormElement label="{i18n>inspectedBy}">
                                                                     <form:fields>
-                                                                        <Input id="idIInspectedBy" value="{itemDetailModel>/Zerstelnum}" editable="{infoModel>/RB0}" type="Text" valueHelpOnly="true" showValueHelp="true" valueHelpIconSrc="sap-icon://arrow-left" valueHelpRequest="handleValueHelpUsers" />
+                                                                        <Input
+                                                                            id="idIInspectedBy"
+                                                                            value="{itemDetailModel>/Zerstelnum}"
+                                                                            editable="{infoModel>/RB0}"
+                                                                            type="Text"
+                                                                            valueHelpOnly="true"
+                                                                            showValueHelp="true"
+                                                                            valueHelpIconSrc="sap-icon://arrow-left"
+                                                                            valueHelpRequest="handleValueHelpFilterUsers"
+                                                                        />
                                                                     </form:fields>
                                                                 </form:FormElement>
                                                             </form:formElements>
@@ -568,7 +575,7 @@
                                                             <form:formElements>
                                                                 <form:FormElement label="{i18n>closedBy}">
                                                                     <form:fields>
-                                                                        <Input id="idIClosedBy" value="{itemDetailModel>/Zretclsby}" editable="{infoModel>/CL1}" type="Text" valueHelpOnly="true" showValueHelp="true" valueHelpIconSrc="sap-icon://arrow-left" valueHelpRequest="handleValueHelpUsers" />
+                                                                        <Input id="idIClosedBy" value="{itemDetailModel>/Zretclsby}" editable="{infoModel>/CL1}" type="Text" valueHelpOnly="true" showValueHelp="true" valueHelpIconSrc="sap-icon://arrow-left" valueHelpRequest="handleValueHelpFilterUsers" />
                                                                     </form:fields>
                                                                 </form:FormElement>
                                                             </form:formElements>
@@ -620,7 +627,16 @@
                                                                 </form:FormElement>
                                                                 <form:FormElement label="{i18n>scrappedBy}">
                                                                     <form:fields>
-                                                                        <Input id="idIScrappedBy" value="{itemDetailModel>/Zretscrapby}" valueHelpOnly="true" editable="{infoModel>/SC1}" type="Text" showValueHelp="true" valueHelpIconSrc="sap-icon://arrow-left" valueHelpRequest="handleValueHelpUsers" />
+                                                                        <Input
+                                                                            id="idIScrappedBy"
+                                                                            value="{itemDetailModel>/Zretscrapby}"
+                                                                            valueHelpOnly="true"
+                                                                            editable="{infoModel>/SC1}"
+                                                                            type="Text"
+                                                                            showValueHelp="true"
+                                                                            valueHelpIconSrc="sap-icon://arrow-left"
+                                                                            valueHelpRequest="handleValueHelpFilterUsers"
+                                                                        />
                                                                     </form:fields>
                                                                 </form:FormElement>
                                                             </form:formElements>

@@ -36,21 +36,22 @@ sap.ui.define([
 
           table: sap.ui.core.Fragment.byId(sFragmentId, "table")
         });
+        sap.ui.core.Fragment.byId(sFragmentId, "table").setFixedColumnCount(1);
         //Array de dialogs, aqui se guardaran todos los dialogs que usaremos para no tener que crearlos cada vez que se llamen
         this.Dialogs = {}
         //Aqui se guardara el dialog que se este usando en ese momento en la App
         this.Dialog;
-        var fnPress = this.selectRowTable.bind(this);
-        var oTemplate = new RowAction({
-          items: [
-            new RowActionItem({
-              type: "Navigation",
-              press: fnPress,
-              visible: true
-            })
-          ]
-        });
-        sap.ui.core.Fragment.byId(sFragmentId, "table").setRowActionTemplate(oTemplate);
+        // var fnPress = this.selectRowTable.bind(this);
+        // var oTemplate = new RowAction({
+        //   items: [
+        //     new RowActionItem({
+        //       type: "Navigation",
+        //       press: fnPress,
+        //       visible: true
+        //     })
+        //   ]
+        // });
+        // sap.ui.core.Fragment.byId(sFragmentId, "table").setRowActionTemplate(oTemplate);
         sFragmentId = this.getView().createId("idFragmentChangeLogs");
         that._oTPChangeLogs = new TablePersoController({
 
@@ -130,7 +131,7 @@ sap.ui.define([
         this.getOwnerComponent().setModel(oModel, "infoModel");
 
         that.loaderModels()
-        this.getPremn();
+        // this.getPremn();
         // let model_item_detail = new JSONModel([{Name:'01',desc:'status uno'}])
         // that.getOwnerComponent().setModel(model_item_detail, "model_item_detail")
 
@@ -147,6 +148,34 @@ sap.ui.define([
 
 
         sFragmentId = this.getView().createId("idFragmentFilterBar");
+        let oMainteneancePlant = sap.ui.core.Fragment.byId(sFragmentId, "idMainteneancePlant");
+        oMainteneancePlant.setFilterFunction(function (sTerm, oItem) {
+          return oItem.getText().match(new RegExp(sTerm, "i")) || oItem.getKey().match(new RegExp(sTerm, "i"));
+        });
+        let oComponentRepairStatus = sap.ui.core.Fragment.byId(sFragmentId, "idComponentRepairStatus");
+        oComponentRepairStatus.setFilterFunction(function (sTerm, oItem) {
+          return oItem.getText().match(new RegExp(sTerm, "i")) || oItem.getKey().match(new RegExp(sTerm, "i"));
+        });
+        let oComponentRepairType = sap.ui.core.Fragment.byId(sFragmentId, "idComponentRepairType");
+        oComponentRepairType.setFilterFunction(function (sTerm, oItem) {
+          return oItem.getText().match(new RegExp(sTerm, "i")) || oItem.getKey().match(new RegExp(sTerm, "i"));
+        });
+        let oCompanyCode = sap.ui.core.Fragment.byId(sFragmentId, "idCompanyCode");
+        oCompanyCode.setFilterFunction(function (sTerm, oItem) {
+          return oItem.getText().match(new RegExp(sTerm, "i")) || oItem.getKey().match(new RegExp(sTerm, "i"));
+        });
+        let oPlanningPlant = sap.ui.core.Fragment.byId(sFragmentId, "idPlanningPlant");
+        oPlanningPlant.setFilterFunction(function (sTerm, oItem) {
+          return oItem.getText().match(new RegExp(sTerm, "i")) || oItem.getKey().match(new RegExp(sTerm, "i"));
+        });
+        let oPlannerGroup = sap.ui.core.Fragment.byId(sFragmentId, "idPlannerGroup");
+        oPlannerGroup.setFilterFunction(function (sTerm, oItem) {
+          return oItem.getText().match(new RegExp(sTerm, "i")) || oItem.getKey().match(new RegExp(sTerm, "i"));
+        });
+        let oPlantWorkCenter = sap.ui.core.Fragment.byId(sFragmentId, "idPlantWorkCenter");
+        oPlantWorkCenter.setFilterFunction(function (sTerm, oItem) {
+          return oItem.getText().match(new RegExp(sTerm, "i")) || oItem.getKey().match(new RegExp(sTerm, "i"));
+        });
         let oRepairTrackingNumber = sap.ui.core.Fragment.byId(sFragmentId, "idRepairTrackingNumber");
         var fnValidator = function (args) {
           var text = args.text.trim();
@@ -248,7 +277,7 @@ sap.ui.define([
         var filters = []
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -280,7 +309,7 @@ sap.ui.define([
         var filters = []
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -312,7 +341,7 @@ sap.ui.define([
         var filters = []
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -344,7 +373,7 @@ sap.ui.define([
         var filters = []
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -376,7 +405,7 @@ sap.ui.define([
         var filters = []
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -408,7 +437,7 @@ sap.ui.define([
         var filters = []
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -440,7 +469,7 @@ sap.ui.define([
         var filters = []
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -472,7 +501,7 @@ sap.ui.define([
         var filters = []
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -516,7 +545,7 @@ sap.ui.define([
         }
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -562,7 +591,7 @@ sap.ui.define([
         var oData = {};
         this.oLoaderData.open();
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, { $orderby: "Zcrtn desc" }, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             data.forEach(oCR => {
@@ -1035,13 +1064,14 @@ sap.ui.define([
         });
         return that.oDialog;
       },
-      RequestSAPGETPromise: function (Model, filters, service, oData) {
+      RequestSAPGETPromise: function (Model, filters, parameters, service, oData) {
         if (this.statusCode != 401) {
           return new Promise(function (resolve, reject) {
             Model.setUseBatch(false)
             Model.read(service, {
               filters: [filters],
               async: false,
+              urlParameters: parameters,
               success: function (oRespon, response) {
                 resolve(oRespon.results)
               },
@@ -1356,7 +1386,7 @@ sap.ui.define([
         ]
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].Ex_Result_Code == "S") {
             //Response Ok
             console.log(data)
@@ -1403,7 +1433,7 @@ sap.ui.define([
         ]
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].Ex_Result_Code == "S") {
             //Response Ok
             console.log(data)
@@ -1545,7 +1575,7 @@ sap.ui.define([
         ]
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             let oModel = new JSONModel(data);
@@ -1583,7 +1613,7 @@ sap.ui.define([
         ]
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].EX_RESULT == "S") {
             //Response Ok
             console.log(data)
@@ -1840,7 +1870,7 @@ sap.ui.define([
         ]
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].Ex_Result == "S") {
             //Response Ok
             // console.log(data)
@@ -1851,8 +1881,6 @@ sap.ui.define([
           } else if (data[0].Ex_Result == "E") {
             console.log(data[0].Ex_Result_Desc)
             // that._buildDialog(that._get_i18n("dialog_error"), "Error", data[0].EX_RESULT_DESC).open();
-          } else if (data.length == 0) {
-            that._buildDialog(that._get_i18n("dialog_error"), "Error", that._get_i18n("dialog_msg_12")).open();
           } else if (data == "E") {
             // that._buildDialog(that._get_i18n("dialog_error"), "Error", that._get_i18n("dialog_msg_10")).open();
           } else {
@@ -1881,7 +1909,7 @@ sap.ui.define([
         ]
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data[0].Ex_Result == "S") {
             //Response Ok
             // console.log(data)
@@ -1915,42 +1943,33 @@ sap.ui.define([
           return "E";
         }
       },
-      getPremn: async function (In_Zrfbnfn) {
+      getPremn: async function (Vorna, Nachn) {
         var that = this
         var model = that.getOwnerComponent().getModel("MODEL_ZGEAM_COMP_REPAIR_WORKBENCH_SRV");
-        var service = "/PremnSet"
+        var service = "/ZPremnExtF4Set"
         var filters = [
+          new sap.ui.model.Filter("Nachn", sap.ui.model.FilterOperator.Contains, Nachn.toUpperCase()),
+          new sap.ui.model.Filter("Vorna", sap.ui.model.FilterOperator.Contains, Vorna.toUpperCase()),
+          new sap.ui.model.Filter("Endda0002", sap.ui.model.FilterOperator.GE, new Date()),
         ]
         var oData = {};
-        let oIApprovedBy = this.byId("idIApprovedBy");
-        let oIInspectedBy = this.byId("idIInspectedBy");
-        let oIClosedBy = this.byId("idIClosedBy");
-        let oIScrappedBy = this.byId("idIScrappedBy");
         try {
-          oIApprovedBy.setBusy(true);
-          oIInspectedBy.setBusy(true);
-          oIClosedBy.setBusy(true);
-          oIScrappedBy.setBusy(true);
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
-          if (data.length > 0) {
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
+          if (data[0].EX_RESULT == "E") {
+            that._buildDialog(that._get_i18n("dialog_error"), "Error", data[0].EX_RESULT_DESC).open();
+          } else if (data.length > 0) {
             //Response Ok
             // console.log(data)
             let oModel = new JSONModel(data);
             oModel.setSizeLimit(100000);
             that.getOwnerComponent().setModel(oModel, "premnModel");
-            //console.log(data)
-            // } else if (data[0].EX_Result == "E") {
-            //   console.log(data[0].EX_Result_Desc)
-            //   // that._buildDialog(that._get_i18n("dialog_error"), "Error", data[0].EX_RESULT_DESC).open();
+            return "S";
+            // console.log(data[0].EX_Result_Desc)
           } else if (data == "E") {
             // that._buildDialog(that._get_i18n("dialog_error"), "Error", that._get_i18n("dialog_msg_10")).open();
           } else {
             that._buildDialog(that._get_i18n("dialog_error"), "Error", that._get_i18n("dialog_msg_2") + service).open();
           }
-          oIApprovedBy.setBusy(false);
-          oIInspectedBy.setBusy(false);
-          oIClosedBy.setBusy(false);
-          oIScrappedBy.setBusy(false);
         } catch (e) {
           //Response Error
           that.oLoader_validando.close()
@@ -1962,31 +1981,68 @@ sap.ui.define([
           } else {
             that._buildDialog(that._get_i18n("dialog_error"), "Error", that._get_i18n("dialog_msg_2") + service + that._get_i18n("dialog_msg_2_1")).open()
           }
-          oIApprovedBy.setBusy(false);
-          oIInspectedBy.setBusy(false);
-          oIClosedBy.setBusy(false);
-          oIScrappedBy.setBusy(false);
         }
       },
-      handleValueHelpUsers: async function (oEvent) {
+      handleValueHelpFilterUsers: async function (oEvent) {
         var oView = this.getView();
         this._sInputId = oEvent.getSource().getId();
         // create value help dialog
-        if (!this._pValueHelpDialogUsers) {
-          this._pValueHelpDialogUsers = Fragment.load({
+        if (!this._pValueHelpDialogUsersFilter) {
+          this._pValueHelpDialogUsersFilter = Fragment.load({
             id: oView.getId(),
-            name: "rgrlist.fragments.users",
+            name: "rgrlist.fragments.filterUsers",
             controller: this
           }).then(function (oValueHelpDialog) {
             oView.addDependent(oValueHelpDialog);
             return oValueHelpDialog;
           });
         }
-
         // open value help dialog
-        this._pValueHelpDialogUsers.then(function (oValueHelpDialog) {
+        this._pValueHelpDialogUsersFilter.then(function (oValueHelpDialog) {
           oValueHelpDialog.open();
         });
+      },
+      closeFilterUsers: function () {
+        let firstName = this.byId("idIFirstName");
+        let lastName = this.byId("idILastName");
+        let oModel = new JSONModel();
+        this.getOwnerComponent().setModel(oModel, "premnModel");
+        firstName.setValue("");
+        lastName.setValue("");
+        this._pValueHelpDialogUsersFilter.then(function (oValueHelpDialog) {
+          oValueHelpDialog.close();
+        });
+      },
+      handleValueHelpUsers: async function (oEvent) {
+        let firstName = this.byId("idIFirstName").getValue();
+        firstName = firstName.replaceAll('*', '')
+        let lastName = this.byId("idILastName").getValue();
+        lastName = lastName.replaceAll('*', '')
+        if (firstName != "" || lastName != "") {
+          this.oLoaderData.open();
+          var oView = this.getView();
+          let response = await this.getPremn(firstName, lastName);
+          if (response == "S") {
+            // create value help dialog
+            if (!this._pValueHelpDialogUsers) {
+              this._pValueHelpDialogUsers = Fragment.load({
+                id: oView.getId(),
+                name: "rgrlist.fragments.users",
+                controller: this
+              }).then(function (oValueHelpDialog) {
+                oView.addDependent(oValueHelpDialog);
+                return oValueHelpDialog;
+              });
+            }
+            // open value help dialog
+            this._pValueHelpDialogUsers.then(function (oValueHelpDialog) {
+              oValueHelpDialog.open();
+            });
+          }
+          this.oLoaderData.close();
+        } else {
+          this._buildDialog(this._get_i18n("dialog_error"), "Error", this._get_i18n("dialog_msg_12")).open()
+        }
       },
       _handleValueHelpSearchUsers: function (oEvent) {
         var sValue = oEvent.getParameter("value");
@@ -2006,6 +2062,7 @@ sap.ui.define([
           productInput.setValue(oSelectedItem.getTitle());
         }
         oEvent.getSource().getBinding("items").filter([]);
+        this.closeFilterUsers();
       },
       getOrdeb: async function () {
         var that = this
@@ -2231,7 +2288,7 @@ sap.ui.define([
         ]
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data.length > 0) {
             //Response Ok
             // console.log(data)
@@ -2266,7 +2323,7 @@ sap.ui.define([
         ]
         var oData = {};
         try {
-          let data = await that.RequestSAPGETPromise(model, filters, service, oData);
+          let data = await that.RequestSAPGETPromise(model, filters, {}, service, oData);
           if (data.length > 0) {
             //Response Ok
             // console.log(data)
